@@ -1,7 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+Product.create(name: "The Count of Monte Cristo (Penguin Classics)", price: 1039, image_url: "https://m.media-amazon.com/images/I/81rHDxooaVL._SL1500_.jpg", description: "Thrown in prison for a crime he has not committed, Edmond Dantes is confined to the grim fortress of If. There he learns of a great hoard of treasure hidden on the Isle of Monte Cristo and he becomes determined not only to escape, but also to unearth the treasure and use it to plot the destruction of the three men responsible for his incarceration.")
+Product.create(name: "Confessions", price: 799, image_url: "https://m.media-amazon.com/images/I/51LRMVVrewL.jpg", description: "Designed to show the details of the soul’s progress, from enjoyment of the beauties outside itself to a study of its own nature and finally to joy in the knowledge of God, ‘Confessions’ was the first work in literature to be concerned entirely with an introspective analysis of the author’s own spiritual and emotional experiences.")
+Product.create(name: "Don Quixote (Penguin Classics)", price: 1399, image_url: "https://m.media-amazon.com/images/I/91+T8krK+rL._SL1500_.jpg", description: "Don Quixote has become so entranced reading tales of chivalry that he decides to turn knight errant himself. In the company of his faithful squire, Sancho Panza, these exploits blossom in all sorts of wonderful ways. While Quixote's fancy often leads him astray—he tilts at windmills, imagining them to be giants—Sancho acquires cunning and a certain sagacity.")
