@@ -5,9 +5,11 @@ class Product < ApplicationRecord
 # Description - length of a minimum of 10 and a maximum of 500 characters
 # Bonus: Do a web search to find out how to add a validation to make sure the image url is a valid file format (like .jpg, .png, etc.)
   validates :name, presence: true, uniqueness: true
-  validates :price, presence: true, numericality: {only_integer: yes, greater_than: 0}
+  validates :price, presence: true, numericality: {greater_than: 0}
   validates :description, length: {minimum: 10, maximum: 500}
-  validates_file_format_of :image, :in => ["gif", "jpg"]
+  validates_format_of :image_url, :with => %r{\.(png|jpg|jpeg)$}i,:message => "must have a valid file type", multiline: true
+  
+  belongs_to :supplier
   def is_discounted?
     if price <= 10
       return true
