@@ -3,13 +3,11 @@
 one:
   name: MyString
   price: 1
-  image_url: MyString.jpg
   description: MyString123456
   supplier: one
 
 two:
   name: MyString2
   price: 1
-  image_url: MyString.jpeg
   description: MyString1234567
   supplier: two
