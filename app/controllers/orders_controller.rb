@@ -9,7 +9,14 @@ class OrdersController < ApplicationController
       tax: params[:tax],
       total: params[:total]
     )
-    render json: {message: "added successfully!" }
+    render :show
   end
+
+  def show
+    @order = Order.find_by(id: params[:id])
+    render :show
+  end
+
+  
 
 end
