@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user
+  before_action :authenticate_admin, except: [:create, :show]
   def create
     product = Product.find_by(id: params["product_id"])
     subtotal = params["quantity"].to_i * product.price
