@@ -1,30 +1,28 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user
-  before_action :authenticate_admin, except: [:create, :show]
+  
   def create
-    product = Product.find_by(id: params["product_id"])
-    subtotal = params["quantity"].to_i * product.price
-    tax = subtotal * 0.10
+    carted_products = current_user.carted_products.where(status: "carted")
     @order = Order.create(
       user_id: current_user.id,
-      product_id: params[:product_id],
-      quantity: params[:quantity],
-      subtotal: subtotal,
-      tax: tax,
-      total: tax + subtotal
     )
-    render :show
+
+    if @order.valid?
+      carted_products.update_all(status: "purchased", order_id: @order.id)
+      @order.update_totals
+      render :show
+    else
+      render json: {errors: @order.errors.full_messages}, status: 422
+    end
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
+    @order = current_user.orders.find_by(id: params[:id])
     render :show
   end
 
   def index
-    @orders = Order.all
+    @orders = current_user.orders
     render :index
   end
-
-
 end
