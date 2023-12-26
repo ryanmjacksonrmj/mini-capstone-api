@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    if params[:category] != nil
-      category = Category.find_by(name: params[:category])
+    if params[:id] && (params[:id] != 1000)
+      category = Category.find_by(id: params[:id])
       @products = category.products
     end
 
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
       supplier_id: params[:supplier_id],
     )
     if @product.valid?
-      Image.create(url: "./PlaceholderPicture.svg", product_id: @product.id)
+      Image.create(url: "./assets/PlaceholderPicture.svg", product_id: @product.id)
       render template: "products/show"
     else
       render json: { errors: @product.errors.full_messages }, status: 422
