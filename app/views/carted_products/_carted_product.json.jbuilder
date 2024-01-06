@@ -6,3 +6,5 @@ json.status carted_product.status
 json.product carted_product.product
 json.user carted_product.user
 json.order carted_product.order
+json.subtotal carted_product.subtotal
+json.images carted_product.product.images

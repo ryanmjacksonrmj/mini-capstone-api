@@ -1,6 +1,15 @@
 class CartedProductsController < ApplicationController
   def create
-    if CartedProduct.where(user_id: current_user.id, product_id: params[:product_id]) == nil
+    if CartedProduct.where(user_id: current_user.id, product_id: params[:product_id]).any?() == false
+      @carted_product = CartedProduct.create(
+        user_id: current_user.id,
+        product_id: params[:product_id],
+        quantity: params[:quantity],
+        status: "carted",
+        order_id: nil,
+      )
+      render :show
+    elsif CartedProduct.where(user_id: current_user.id, status: "carted", product_id: params[:product_id]).any?() == false
       @carted_product = CartedProduct.create(
         user_id: current_user.id,
         product_id: params[:product_id],
@@ -10,13 +19,15 @@ class CartedProductsController < ApplicationController
       )
       render :show
     else
-      @carted_product = CartedProduct.find_by(user_id: current_user.id, product_id: params[:product_id])
+      @carted_product = CartedProduct.find_by(user_id: current_user.id, status: "carted", product_id: params[:product_id])
       @carted_product.update(
         user_id: current_user.id,
         product_id: @carted_product.product_id,
         quantity: (@carted_product.quantity + (params[:quantity].to_i)),
         status: @carted_product.status,
+        order_id: @carted_product.order_id,
       )
+      render :show
     end
   end
 
