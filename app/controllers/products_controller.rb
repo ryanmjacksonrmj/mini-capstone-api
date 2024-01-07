@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     if params[:id] != "1000"
       @products = Category.find_by(id: params[:id]).products
     else
-      @products = Product.all
+      @products = Product.where(active: true)
     end
     render :index
   end
@@ -21,9 +21,10 @@ class ProductsController < ApplicationController
       price: params[:price],
       description: params[:description],
       supplier_id: params[:supplier_id],
+      active: true,
     )
     if @product.valid?
-      Image.create(url: "./assets/PlaceholderPicture.svg", product_id: @product.id)
+      Image.create(url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/310px-Placeholder_view_vector.svg.png", product_id: @product.id)
       render template: "products/show"
     else
       render json: { errors: @product.errors.full_messages }, status: 422
@@ -46,8 +47,14 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product = Product.find_by(id: params["id"])
-    product.destroy
-    render json: { message: "Product has been destroyed." }
+    @product = Product.find_by(id: params["id"])
+    if CartedProduct.where(product_id: @product.id, status: "carted") != []
+      @products = CartedProduct.where(product_id: @product.id, status: "carted")
+    end
+    @product.update(active: false)
+    if @products != nil
+      @products.update_all(status: "deleted_product")
+      render json: { message: "Product has been set to inactive." }
+    end
   end
 end
