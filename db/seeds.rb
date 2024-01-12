@@ -1,8 +1,5 @@
 User.create!([
-  { name: "user1", email: "user1@test.com", password_digest: "$2a$12$COKcH.aC96Zc4CD5wTJzh.nBXfxMSzpmvIpvs7J5zXd4hnUkVhQEG", admin: true },
-  { name: "user2", email: "user2@test.com", password_digest: "$2a$12$HeEz9VDDUAoBzcxZJhkHwORZWXQhovavZVqxMl5n9PQbl1Yn8ijrS", admin: false },
-  { name: "user3", email: "user3@test.com", password_digest: "$2a$12$cCvJogQdx75xN.mAOCzRr.8m33j.Ebm5Qa.rX.cByjlYaoXiO9n3q", admin: false },
-  { name: "user4", email: "user4@test.com", password_digest: "$2a$12$zsTVMC2QyUbJL4VjDIJDauB6gOJ0zq3QsBeKZ7gTt9VQaJHIJRCcW", admin: false },
+  { name: "user5", email: "user5@test.com", password_digest: "$2a$12$COKcH.aC96Zc4CD5wTJzh.nBXfxMSzpmvIpvs7J5zXd4hnUkVhQEG", admin: true },
 ])
 Supplier.create!([
   { name: "Harper-Collins", email: "hc@test.com", phone_number: "123-456-7890" },
